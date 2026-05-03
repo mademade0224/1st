@@ -1,25 +1,34 @@
-   const modal = document.getElementById("modal");
-    const openBtn = document.getElementById("openModal");
-    const closeBtn = document.getElementById("closeModal");
+function setupThree() {
+  const canvas = document.getElementById("canvas");
 
-    openBtn.onclick = () => modal.style.display = "block";
-    closeBtn.onclick = () => modal.style.display = "none";
+  const renderer = new THREE.WebGLRenderer({ canvas });
 
-    window.onclick = (e) => {
-      if (e.target === modal) modal.style.display = "none";
-    };
+  const scene = new THREE.Scene();
 
-let progress = 0;
-const bar = document.getElementById("progress");
+  const camera = new THREE.PerspectiveCamera(75, 400/300, 0.1, 1000);
+  camera.position.z = 5;
 
-const interval = setInterval(() => {
-  progress += Math.random() * 10; // ちょっとずつ進む
-  if (progress >= 100) {
-    progress = 100;
-    clearInterval(interval);
+  renderer.setSize(400, 300);
 
-    // 完了したら消す
-    document.getElementById("loader").style.display = "none";
+  // ライト
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(1, 1, 1);
+  scene.add(light);
+
+  // テスト用オブジェクト
+  const geometry = new THREE.BoxGeometry();
+  const material = new THREE.MeshStandardMaterial({ color: 0x00ffcc });
+  const cube = new THREE.Mesh(geometry, material);
+  scene.add(cube);
+
+  function animate() {
+    requestAnimationFrame(animate);
+
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+
+    renderer.render(scene, camera);
   }
-  bar.style.width = progress + "%";
-}, 200);
+
+  animate();
+}
