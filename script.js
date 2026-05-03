@@ -30,6 +30,7 @@ function setupToTop() {
   if (!btn) return;
 
   btn.onclick = () => {
+    console.log("クリックされた！");
     window.scrollTo({
       top: 0,
       behavior: "smooth"
