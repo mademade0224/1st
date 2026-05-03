@@ -3,14 +3,14 @@ import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 function setupModal() {
   const btn = document.getElementById("openModal");
   const modal = document.getElementById("modal");
-  const modal = document.getElementById("closeModal");
-  
+  const close = document.getElementById("closeModal");
+
   if (!btn || !modal || !close) return;
 
+  // 開く
   btn.onclick = () => {
     modal.style.display = "block";
   };
-}
 
   // ✖で閉じる
   close.onclick = () => {
@@ -22,6 +22,8 @@ function setupModal() {
     if (e.target === modal) {
       modal.style.display = "none";
     }
+  };
+}
 
 function setupThree() {
   const canvas = document.getElementById("canvas");
