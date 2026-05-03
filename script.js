@@ -98,14 +98,9 @@ function setupThree() {
   });
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  setupThree();
-  setupModal();
-  setupToTop(); // ←これ追加
-});
-
 // ✅ ここは1個だけ
 window.addEventListener("DOMContentLoaded", () => {
   setupThree();
   setupModal();
+  setupToTop();
 });
