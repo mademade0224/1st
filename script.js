@@ -25,6 +25,18 @@ function setupModal() {
   };
 }
 
+function setupToTop() {
+  const btn = document.getElementById("toTop");
+  if (!btn) return;
+
+  btn.onclick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+}
+
 function setupThree() {
 
   // 🛑 2回目以降は止める
@@ -85,6 +97,12 @@ function setupThree() {
     camera.updateProjectionMatrix();
   });
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  setupThree();
+  setupModal();
+  setupToTop(); // ←これ追加
+});
 
 // ✅ ここは1個だけ
 window.addEventListener("DOMContentLoaded", () => {
