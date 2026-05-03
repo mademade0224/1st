@@ -204,7 +204,7 @@ body {
   border: none;
   border-radius: 20px;
   cursor: pointer;
-
+  background: #000000;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   z-index: 20;
 }
