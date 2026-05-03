@@ -169,20 +169,6 @@ body {
   z-index: 1;
 }
 
-#toTop {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-
-  padding: 10px 14px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  z-index: 20;
-}
-
 .btn-border-bottom {
   position: relative;
   display: inline-block;
@@ -207,4 +193,18 @@ body {
 .btn-border-bottom:hover:before {
   top: -webkit-calc(100% - 3px);
   top: calc(100% - 3px);
+}
+
+#toTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  padding: 10px 14px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 20;
 }
