@@ -3,32 +3,44 @@ import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 function setupThree() {
   const canvas = document.getElementById("canvas");
 
-  // 🛑 ここチェック
   if (!canvas) {
     console.error("canvasが見つからない");
     return;
   }
 
-  const renderer = new THREE.WebGLRenderer({ canvas });
+  // レンダラー
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(canvas.clientWidth, canvas.clientHeight);
 
+  // シーン
   const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x111111);
 
-  const camera = new THREE.PerspectiveCamera(75, 400/300, 0.1, 1000);
+  // カメラ
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    canvas.clientWidth / canvas.clientHeight,
+    0.1,
+    1000
+  );
   camera.position.z = 5;
 
-  renderer.setSize(400, 300);
-
-  // 🌞 ライト（OK）
+  // ライト（ちょい豪華に）
   const light = new THREE.DirectionalLight(0xffffff, 1);
-  light.position.set(1, 1, 1);
+  light.position.set(2, 2, 2);
   scene.add(light);
 
-  // 🧊 オブジェクト（OK）
+  const ambient = new THREE.AmbientLight(0x404040);
+  scene.add(ambient);
+
+  // キューブ
   const geometry = new THREE.BoxGeometry();
   const material = new THREE.MeshStandardMaterial({ color: 0x00ffcc });
   const cube = new THREE.Mesh(geometry, material);
   scene.add(cube);
 
+  // アニメーション
   function animate() {
     requestAnimationFrame(animate);
 
@@ -39,9 +51,16 @@ function setupThree() {
   }
 
   animate();
+
+  // リサイズ対応（これ超大事）
+  window.addEventListener("resize", () => {
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+  });
 }
 
-// 🔥 ここ重要（起動）
-window.onload = () => {
-  setupThree();
-};
+window.addEventListener("DOMContentLoaded", setupThree);
