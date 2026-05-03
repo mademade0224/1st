@@ -13,6 +13,8 @@ function setupThree() {
 
   const scene = new THREE.Scene();
 
+  scene.background = new THREE.Color(0x111111);
+
   const camera = new THREE.PerspectiveCamera(75, 400/300, 0.1, 1000);
   camera.position.z = 5;
 
