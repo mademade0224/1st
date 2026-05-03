@@ -1,5 +1,13 @@
+import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
+
 function setupThree() {
   const canvas = document.getElementById("canvas");
+
+  // 🛑 ここチェック
+  if (!canvas) {
+    console.error("canvasが見つからない");
+    return;
+  }
 
   const renderer = new THREE.WebGLRenderer({ canvas });
 
@@ -10,12 +18,12 @@ function setupThree() {
 
   renderer.setSize(400, 300);
 
-  // ライト
+  // 🌞 ライト（OK）
   const light = new THREE.DirectionalLight(0xffffff, 1);
   light.position.set(1, 1, 1);
   scene.add(light);
 
-  // テスト用オブジェクト
+  // 🧊 オブジェクト（OK）
   const geometry = new THREE.BoxGeometry();
   const material = new THREE.MeshStandardMaterial({ color: 0x00ffcc });
   const cube = new THREE.Mesh(geometry, material);
@@ -32,3 +40,8 @@ function setupThree() {
 
   animate();
 }
+
+// 🔥 ここ重要（起動）
+window.onload = () => {
+  setupThree();
+};
