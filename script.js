@@ -5,7 +5,7 @@ function setupModal() {
   const modal = document.getElementById("modal");
   const modal = document.getElementById("closeModal");
   
-  if (!btn || !modal) return;
+  if (!btn || !modal || !close) return;
 
   btn.onclick = () => {
     modal.style.display = "block";
