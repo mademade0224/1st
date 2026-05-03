@@ -23,10 +23,8 @@ function setupThree() {
   light.position.set(1, 1, 1);
   scene.add(light);
 
-  // 👇 モデル用の変数（外に置くのがポイント）
   let model = null;
 
-  // 👇 ロード
   const loader = new GLTFLoader();
   loader.load('model.glb', (gltf) => {
     model = gltf.scene;
@@ -37,7 +35,6 @@ function setupThree() {
     scene.add(model);
   });
 
-  // （デバッグ用キューブ残してもOK）
   const geometry = new THREE.BoxGeometry();
   const material = new THREE.MeshStandardMaterial({ color: 0x00ffcc });
   const cube = new THREE.Mesh(geometry, material);
@@ -46,11 +43,9 @@ function setupThree() {
   function animate() {
     requestAnimationFrame(animate);
 
-    // キューブ回転
     cube.rotation.x += 0.01;
     cube.rotation.y += 0.01;
 
-    // 👇 モデルも回転（ここが今回の核心）
     if (model) {
       model.rotation.y += 0.01;
     }
@@ -61,6 +56,9 @@ function setupThree() {
   animate();
 }
 
+// 🔥 ここ修正（全部呼ぶ）
 window.onload = () => {
+  setupModal();   // ←これ忘れるとモーダル死ぬ
+  setupLoader();  // ←使ってるなら
   setupThree();
 };
