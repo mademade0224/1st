@@ -88,7 +88,6 @@ function setupThree() {
   });
 }
 
-window.addEventListener("DOMContentLoaded", setupThree);
 window.addEventListener("DOMContentLoaded", () => {
   setupThree();
   setupModal(); // ←復活
