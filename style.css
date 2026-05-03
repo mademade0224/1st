@@ -162,3 +162,19 @@ body {
   height: 100%;
   display: block;
 }
+
+#toTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  padding: 10px 14px;
+  background: #00ffcc;
+  color: #000;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 20;
+}
