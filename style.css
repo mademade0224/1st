@@ -188,6 +188,7 @@ body {
   border-radius: 3px;
   background:#67c5ff;
   transition: .2s;
+  color: #3399ff;
 }
 
 .btn-border-bottom:hover:before {
