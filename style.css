@@ -200,11 +200,11 @@ body {
   bottom: 20px;
   right: 20px;
 
-  padding: 10px 14px;
-  border: none;
-  border-radius: 20px;
+  background: none;   /* ←黒消す */
+  border: none;       /* ←枠消す */
+  box-shadow: none;   /* ←影消す */
+  padding: 0;
+
   cursor: pointer;
-  background: #000000;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   z-index: 20;
 }
