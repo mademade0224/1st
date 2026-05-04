@@ -9,6 +9,18 @@ h2 {
 p {
   line-height: 0.5;
 }
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+}
 .button {
   background-color: #000;
   border: solid 2px #fff;
