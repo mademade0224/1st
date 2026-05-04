@@ -3,6 +3,7 @@ import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders
 
 // 🔒 1回しか起動させないフラグ
 let isThreeRunning = false;
+let model = null;
 
 // ✅ モーダル
 function setupModal() {
@@ -106,7 +107,8 @@ loader.load(
 
       model.scale.set(0.5, 0.5, 0.5);
       model.position.set(0, 0, 0);
-
+      model.rotation.set(0, 0, 0);
+      
       scene.add(model);
     },
     undefined,
@@ -120,6 +122,10 @@ loader.load(
 
     cube.rotation.x += 0.01;
     cube.rotation.y += 0.01;
+    
+   if (model) {
+     model.rotation.y += 0.01; // ←これが「立ったまま回る」
+   }
 
     renderer.render(scene, camera);
   }
