@@ -100,7 +100,7 @@ fetch('model.glb')
   const loader = new GLTFLoader();
 
 loader.load(
-  'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
+  'model.glb',
     (gltf) => {
       const model = gltf.scene;
 
