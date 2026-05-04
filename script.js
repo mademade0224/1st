@@ -4,10 +4,14 @@ import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders
 // 🔒 1回しか起動させないフラグ
 let isThreeRunning = false;
 
-function setupModal() {
-  const btn = document.getElementById("openModal");
-  const modal = document.getElementById("modal");
-  const close = document.getElementById("closeModal");
+fetch('model.glb')
+  .then(res => {
+    console.log("status:", res.status, "type:", res.headers.get("content-type"));
+    return res.text(); // ←次に渡す
+  })
+  .then(text => {
+    console.log(text.slice(0, 50));
+  });
 
   if (!btn || !modal || !close) return;
 
