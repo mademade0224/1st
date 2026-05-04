@@ -4,14 +4,11 @@ import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders
 // 🔒 1回しか起動させないフラグ
 let isThreeRunning = false;
 
-fetch('model.glb')
-  .then(res => {
-    console.log("status:", res.status, "type:", res.headers.get("content-type"));
-    return res.text(); // ←次に渡す
-  })
-  .then(text => {
-    console.log(text.slice(0, 50));
-  });
+// ✅ モーダル（復活させた）
+function setupModal() {
+  const btn = document.getElementById("openModal");
+  const modal = document.getElementById("modal");
+  const close = document.getElementById("closeModal");
 
   if (!btn || !modal || !close) return;
 
@@ -23,6 +20,7 @@ fetch('model.glb')
   };
 }
 
+// ✅ ボタン位置制御
 function controlModalButton() {
   const btn = document.getElementById("openModal");
   const navbar = document.getElementById("navbar");
@@ -43,6 +41,7 @@ function controlModalButton() {
   window.addEventListener("scroll", updatePosition);
 }
 
+// ✅ トップへ
 function setupToTop() {
   const btn = document.getElementById("toTop");
   if (!btn) return;
@@ -52,18 +51,24 @@ function setupToTop() {
   };
 }
 
+// ✅ Three.js
 function setupThree() {
-  
-  fetch('model.glb')
-  .then(res => console.log("status:", res.status, "type:", res.headers.get("content-type")));
-  .then(res => res.text())
-  .then(text => console.log(text.slice(0, 50)));
-  
+
   if (isThreeRunning) return;
   isThreeRunning = true;
 
   const canvas = document.getElementById("canvas");
   if (!canvas) return;
+
+  // 🔍 GLBチェック（正しい書き方）
+  fetch('model.glb')
+    .then(res => {
+      console.log("status:", res.status, "type:", res.headers.get("content-type"));
+      return res.text();
+    })
+    .then(text => {
+      console.log(text.slice(0, 50));
+    });
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -87,30 +92,26 @@ function setupThree() {
   const ambient = new THREE.AmbientLight(0x404040);
   scene.add(ambient);
 
-  // 🧊 キューブ（比較用に残してOK）
   const cube = new THREE.Mesh(
     new THREE.BoxGeometry(),
     new THREE.MeshStandardMaterial({ color: 0x00ffcc })
   );
   scene.add(cube);
 
-  // 🧍 GLBモデル読み込み
+  // 🧍 モデル読み込み
   const loader = new GLTFLoader();
 
   loader.load(
-    'model.glb', // ←パス注意
-
+    'model.glb',
     (gltf) => {
       const model = gltf.scene;
 
-      model.scale.set(1, 1, 1); // サイズ調整
+      model.scale.set(1, 1, 1);
       model.position.set(0, 0, 0);
 
       scene.add(model);
     },
-
     undefined,
-
     (error) => {
       console.error("GLB読み込みエラー:", error);
     }
