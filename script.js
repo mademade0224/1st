@@ -35,7 +35,7 @@ function controlModalButton() {
     const navHeight = navbar.offsetHeight;
 
     if (window.scrollY < 10) { // ←ゆるく判定
-      btn.style.top = navHeight + 10 + "px";
+      btn.style.top = navHeight + 30 + "px";
     } else {
       btn.style.top = "20px";
     }
