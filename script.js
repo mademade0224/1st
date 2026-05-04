@@ -97,7 +97,7 @@ function setupThree() {
 loader.load(
   'model2.glb',
     (gltf) => {
-      const model = gltf.scene;
+     model = gltf.scene;
 
       model.scale.set(0.5, 0.5, 0.5);
       model.position.set(0, 0, 0);
