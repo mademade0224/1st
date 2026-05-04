@@ -4,7 +4,7 @@ import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders
 // 🔒 1回しか起動させないフラグ
 let isThreeRunning = false;
 
-// ✅ モーダル（復活させた）
+// ✅ モーダル
 function setupModal() {
   const btn = document.getElementById("openModal");
   const modal = document.getElementById("modal");
@@ -60,7 +60,7 @@ function setupThree() {
   const canvas = document.getElementById("canvas");
   if (!canvas) return;
 
-  // 🔍 GLBチェック（正しい書き方）
+  // 🔍 GLBチェック（※一時用。あとで消してOK）
   fetch('model.glb')
     .then(res => {
       console.log("status:", res.status, "type:", res.headers.get("content-type"));
@@ -92,6 +92,7 @@ function setupThree() {
   const ambient = new THREE.AmbientLight(0x404040);
   scene.add(ambient);
 
+  // 🧊 比較用キューブ
   const cube = new THREE.Mesh(
     new THREE.BoxGeometry(),
     new THREE.MeshStandardMaterial({ color: 0x00ffcc })
@@ -128,9 +129,10 @@ function setupThree() {
 
   animate();
 
+  // ✅ リサイズ（安全版）
   window.addEventListener("resize", () => {
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
+    const width = canvas.clientWidth || 400;
+    const height = canvas.clientHeight || 300;
 
     renderer.setSize(width, height);
     camera.aspect = width / height;
