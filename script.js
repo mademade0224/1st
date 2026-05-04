@@ -49,6 +49,9 @@ function setupToTop() {
 }
 
 function setupThree() {
+  
+  fetch('model.glb')
+  .then(res => console.log("status:", res.status, "type:", res.headers.get("content-type")));
 
   if (isThreeRunning) return;
   isThreeRunning = true;
