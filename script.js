@@ -62,15 +62,11 @@ function setupThree() {
 
   // 🔍 GLBチェック（※一時用。あとで消してOK）
 
-  fetch('model.glb')
-  .then(res => {
-    console.log("status:", res.status, "type:", res.headers.get("content-type"));
-    return res.arrayBuffer(); // ←ここ重要
-  })
-  .then(buffer => {
-    console.log("byteLength:", buffer.byteLength);
-  });
+fetch('model.glb')
+  .then(res => res.arrayBuffer())
+  .then(buf => console.log(buf.byteLength));
 
+  
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(canvas.clientWidth, canvas.clientHeight);
