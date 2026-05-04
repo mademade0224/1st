@@ -25,6 +25,25 @@ function setupModal() {
   };
 }
 
+function controlModalButton() {
+  const btn = document.getElementById("openModal");
+  const navbar = document.getElementById("navbar"); // ナビにIDつけてね
+
+  if (!btn || !navbar) return;
+
+  window.addEventListener("scroll", () => {
+    const navHeight = navbar.offsetHeight;
+
+    if (window.scrollY === 0) {
+      // 一番上にいるとき
+      btn.style.top = navHeight + 10 + "px";
+    } else {
+      // 普段
+      btn.style.top = "20px";
+    }
+  });
+}
+
 function setupToTop() {
   const btn = document.getElementById("toTop");
   if (!btn) return;
