@@ -67,7 +67,7 @@ function setupThree() {
   renderer.setSize(canvas.clientWidth, canvas.clientHeight);
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x111111);
+  scene.background = new THREE.Color(0xffffff);
 
   const camera = new THREE.PerspectiveCamera(
     75,
@@ -77,11 +77,11 @@ function setupThree() {
   );
   camera.position.z = 5;
 
-  const light = new THREE.DirectionalLight(0xffffff, 1);
-  light.position.set(2, 2, 2);
+  const light = new THREE.DirectionalLight(0xffffff, 1.2);
+  light.position.set(3, 5, 2);
   scene.add(light);
 
-  const ambient = new THREE.AmbientLight(0x404040);
+  const ambient = new THREE.AmbientLight(0xffffff, 0.6);
   scene.add(ambient);
 
 
@@ -92,6 +92,13 @@ loader.load(
   'model2.glb',
   (gltf) => {
     model = gltf.scene;
+
+      model.traverse((child) => {
+  if (child.isMesh) {
+    child.material.metalness = 0.2;
+    child.material.roughness = 0.6;
+  }
+});
 
     model.scale.set(0.5, 0.5, 0.5);
     model.position.set(0, 0, 0);
