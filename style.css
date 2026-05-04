@@ -88,6 +88,7 @@ body {
   top: 20px;
   right: 20px;
   z-index: 20;
+  transition: top 0.2s;
 }
 
 ._header_xbpe6_1 {
