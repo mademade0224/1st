@@ -1,4 +1,5 @@
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
+import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
 
 // 🔒 1回しか起動させないフラグ
 let isThreeRunning = false;
@@ -10,18 +11,11 @@ function setupModal() {
 
   if (!btn || !modal || !close) return;
 
-  btn.onclick = () => {
-    modal.style.display = "block";
-  };
-
-  close.onclick = () => {
-    modal.style.display = "none";
-  };
+  btn.onclick = () => modal.style.display = "block";
+  close.onclick = () => modal.style.display = "none";
 
   modal.onclick = (e) => {
-    if (e.target === modal) {
-      modal.style.display = "none";
-    }
+    if (e.target === modal) modal.style.display = "none";
   };
 }
 
@@ -32,19 +26,16 @@ function controlModalButton() {
   if (!btn || !navbar) return;
 
   function updatePosition() {
-    const navHeight = navbar.offsetHeight;
+    const rect = navbar.getBoundingClientRect();
 
-    if (window.scrollY < 10) { // ←ゆるく判定
-      btn.style.top = navHeight + 45 + "px";
+    if (window.scrollY < 10) {
+      btn.style.top = rect.bottom + 20 + "px";
     } else {
       btn.style.top = "20px";
     }
   }
 
-  // 初期位置もちゃんと設定
   updatePosition();
-
-  // スクロールで更新
   window.addEventListener("scroll", updatePosition);
 }
 
@@ -53,26 +44,17 @@ function setupToTop() {
   if (!btn) return;
 
   btn.onclick = () => {
-    console.log("クリックされた！");
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 }
 
 function setupThree() {
 
-  // 🛑 2回目以降は止める
   if (isThreeRunning) return;
   isThreeRunning = true;
 
   const canvas = document.getElementById("canvas");
-
-  if (!canvas) {
-    console.error("canvasが見つからない");
-    return;
-  }
+  if (!canvas) return;
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -96,10 +78,34 @@ function setupThree() {
   const ambient = new THREE.AmbientLight(0x404040);
   scene.add(ambient);
 
-  const geometry = new THREE.BoxGeometry();
-  const material = new THREE.MeshStandardMaterial({ color: 0x00ffcc });
-  const cube = new THREE.Mesh(geometry, material);
+  // 🧊 キューブ（比較用に残してOK）
+  const cube = new THREE.Mesh(
+    new THREE.BoxGeometry(),
+    new THREE.MeshStandardMaterial({ color: 0x00ffcc })
+  );
   scene.add(cube);
+
+  // 🧍 GLBモデル読み込み
+  const loader = new GLTFLoader();
+
+  loader.load(
+    'model.glb', // ←パス注意
+
+    (gltf) => {
+      const model = gltf.scene;
+
+      model.scale.set(1, 1, 1); // サイズ調整
+      model.position.set(0, 0, 0);
+
+      scene.add(model);
+    },
+
+    undefined,
+
+    (error) => {
+      console.error("GLB読み込みエラー:", error);
+    }
+  );
 
   function animate() {
     requestAnimationFrame(animate);
@@ -122,7 +128,7 @@ function setupThree() {
   });
 }
 
-// ✅ ここは1個だけ
+// 初期化
 window.addEventListener("DOMContentLoaded", () => {
   setupThree();
   setupModal();
