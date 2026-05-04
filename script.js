@@ -100,7 +100,7 @@ loader.load(
   }
 });
 
-    model.scale.set(0.5, 0.5, 0.5);
+    model.scale.set(1.2, 1.2, 1.2);
     model.position.set(0, 0, 0);
     model.rotation.set(0, 0, 0);
 
