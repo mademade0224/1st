@@ -61,14 +61,15 @@ function setupThree() {
   if (!canvas) return;
 
   // 🔍 GLBチェック（※一時用。あとで消してOK）
+
   fetch('model.glb')
-    .then(res => {
-      console.log("status:", res.status, "type:", res.headers.get("content-type"));
-      return res.text();
-    })
-    .then(text => {
-      console.log(text.slice(0, 50));
-    });
+  .then(res => {
+    console.log("status:", res.status, "type:", res.headers.get("content-type"));
+    return res.arrayBuffer(); // ←ここ重要
+  })
+  .then(buffer => {
+    console.log("byteLength:", buffer.byteLength);
+  });
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
