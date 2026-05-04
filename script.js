@@ -62,7 +62,7 @@ function setupThree() {
 
   // 🔍 GLBチェック（※一時用。あとで消してOK）
 
-fetch('model.glb')
+fetch('model2.glb')
   .then(res => res.arrayBuffer())
   .then(buf => console.log(buf.byteLength));
 
@@ -100,7 +100,7 @@ fetch('model.glb')
   const loader = new GLTFLoader();
 
 loader.load(
-  'model.glb',
+  'model2.glb',
     (gltf) => {
       const model = gltf.scene;
 
