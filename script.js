@@ -123,4 +123,5 @@ window.addEventListener("DOMContentLoaded", () => {
   setupThree();
   setupModal();
   setupToTop();
+  controlModalButton();
 });
