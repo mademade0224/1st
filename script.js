@@ -84,12 +84,6 @@ function setupThree() {
   const ambient = new THREE.AmbientLight(0x404040);
   scene.add(ambient);
 
-  // 🧊 比較用キューブ
-  const cube = new THREE.Mesh(
-    new THREE.BoxGeometry(),
-    new THREE.MeshStandardMaterial({ color: 0x00ffcc })
-  );
-  scene.add(cube);
 
 // 🧍 モデル読み込み
 const loader = new GLTFLoader();
