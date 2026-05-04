@@ -83,6 +83,12 @@ body {
   transform: scale(1.2);
 }
 
+#openModal {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 20;
+}
 
 ._header_xbpe6_1 {
   display: flex;
