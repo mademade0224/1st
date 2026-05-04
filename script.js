@@ -52,7 +52,9 @@ function setupThree() {
   
   fetch('model.glb')
   .then(res => console.log("status:", res.status, "type:", res.headers.get("content-type")));
-
+  .then(res => res.text())
+  .then(text => console.log(text.slice(0, 50)));
+  
   if (isThreeRunning) return;
   isThreeRunning = true;
 
