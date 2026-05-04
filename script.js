@@ -61,12 +61,6 @@ function setupThree() {
   const canvas = document.getElementById("canvas");
   if (!canvas) return;
 
-  // 🔍 GLBチェック（※一時用。あとで消してOK）
-
-fetch('model2.glb')
-  .then(res => res.arrayBuffer())
-  .then(buf => console.log(buf.byteLength));
-
   
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
