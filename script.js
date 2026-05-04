@@ -91,40 +91,38 @@ function setupThree() {
   );
   scene.add(cube);
 
-  // 🧍 モデル読み込み
-  const loader = new GLTFLoader();
+// 🧍 モデル読み込み
+const loader = new GLTFLoader();
 
 loader.load(
   'model2.glb',
-    (gltf) => {
-     model = gltf.scene;
+  (gltf) => {
+    model = gltf.scene;
 
-      model.scale.set(0.5, 0.5, 0.5);
-      model.position.set(0, 0, 0);
-      model.rotation.set(0, 0, 0);
-      
-      scene.add(model);
-    },
-    undefined,
-    (error) => {
-      console.error("GLB読み込みエラー:", error);
-    }
-  );
+    model.scale.set(0.5, 0.5, 0.5);
+    model.position.set(0, 0, 0);
+    model.rotation.set(0, 0, 0);
 
-  function animate() {
-    requestAnimationFrame(animate);
+    scene.add(model);
+  },
+  undefined,
+  (error) => {
+    console.error("GLB読み込みエラー:", error);
+  }
+);
 
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
-    
-   if (model) {
-     model.rotation.y += 0.01; // ←これが「立ったまま回る」
-   }
+function animate() {
+  requestAnimationFrame(animate);
 
-    renderer.render(scene, camera);
+  // 🧍 モデルだけ回転
+  if (model) {
+    model.rotation.y += 0.01;
   }
 
-  animate();
+  renderer.render(scene, camera);
+}
+
+animate();
 
   // ✅ リサイズ（安全版）
   window.addEventListener("resize", () => {
