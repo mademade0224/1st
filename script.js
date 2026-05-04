@@ -27,21 +27,25 @@ function setupModal() {
 
 function controlModalButton() {
   const btn = document.getElementById("openModal");
-  const navbar = document.getElementById("navbar"); // ナビにIDつけてね
+  const navbar = document.getElementById("navbar");
 
   if (!btn || !navbar) return;
 
-  window.addEventListener("scroll", () => {
+  function updatePosition() {
     const navHeight = navbar.offsetHeight;
 
-    if (window.scrollY === 0) {
-      // 一番上にいるとき
+    if (window.scrollY < 10) { // ←ゆるく判定
       btn.style.top = navHeight + 10 + "px";
     } else {
-      // 普段
       btn.style.top = "20px";
     }
-  });
+  }
+
+  // 初期位置もちゃんと設定
+  updatePosition();
+
+  // スクロールで更新
+  window.addEventListener("scroll", updatePosition);
 }
 
 function setupToTop() {
