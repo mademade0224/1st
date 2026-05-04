@@ -103,8 +103,8 @@ function setupThree() {
   // 🧍 モデル読み込み
   const loader = new GLTFLoader();
 
-  loader.load(
-    'model.glb',
+loader.load(
+  'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
     (gltf) => {
       const model = gltf.scene;
 
