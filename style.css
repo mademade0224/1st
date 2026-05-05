@@ -259,6 +259,16 @@ body {
   font-family: cursive;
 }
 
+.img-wrap {
+  display: flex;
+  flex-wrap: wrap; /* ←これ大事：はみ出たら次の行へ */
+  gap: 2%; /* 余白をここでまとめて管理 */
+}
+
+.img-wrap img {
+  width: 48%; /* 2枚並びになる */
+}
+
 .img05 {
   width: 100%;
   aspect-ratio: 1 / 1;
